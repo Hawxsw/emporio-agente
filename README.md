@@ -146,7 +146,7 @@ Conversas reais rodadas com `--debug`, mostrando as ferramentas chamadas:
 | Arquivo | Cenário | O que demonstra |
 |---|---|---|
 | [`examples/01-violoes-ate-1000.md`](examples/01-violoes-ate-1000.md) | "Quais opções de violões disponíveis custando até R$1000?" | Catálogo com filtro de preço e estoque |
-| [`examples/02-endereco.md`](examples/02-endereco.md) | "Qual o endereço da loja?" | Consulta às políticas |
-| [`examples/03-preco-takamine.md`](examples/03-preco-takamine.md) | "Quanto custa o Takamine GD20?" | Preço e promoção |
+| [`examples/02-endereco.md`](examples/02-endereco.md) | "Qual o endereço da loja?" | Consulta às políticas (endereço e horário) |
+| [`examples/03-preco-takamine.md`](examples/03-preco-takamine.md) | "Quanto custa o Takamine GD20?" | Preço do catálogo + regras de parcelamento da política |
 | [`examples/04-devolucao.md`](examples/04-devolucao.md) | "Me arrependi da minha compra, posso devolver meu pedido?" | Pedido + política de devolução (não trivial) |
 | [`examples/05-fora-do-escopo.md`](examples/05-fora-do-escopo.md) | Acessório e assunto sem relação com a loja | Recusa educada e redirecionamento |
