@@ -27,7 +27,6 @@ def load_products() -> pd.DataFrame:
     categories = _read("categories").rename(columns={"name": "category_name"})
     promotions = _read("promotions")
 
-    # active promotions only; if a product has more than one, keep the biggest discount
     active = (
         promotions[promotions["is_active"] == 1]
         .sort_values("discount_percent", ascending=False)
@@ -43,7 +42,6 @@ def load_products() -> pd.DataFrame:
     df["final_price"] = (df["price_brl"] * (1 - df["discount_percent"] / 100)).round(2)
     df["available"] = (df["status"] == "active") & (df["stock_quantity"] > 0)
     df["specs"] = df["specs"].apply(lambda s: json.loads(s) if isinstance(s, str) else {})
-    # single normalized text used by the keyword search
     df["search_text"] = (df["name"] + " " + df["category_name"] + " " + df["description"]).apply(normalize)
     return df
 

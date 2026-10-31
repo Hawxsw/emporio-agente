@@ -1,4 +1,4 @@
-google-genai>=2.34
+anthropic>=2.3
 pandas>=3.0
 pypdf>=6.0
 python-dotenv>=1.0

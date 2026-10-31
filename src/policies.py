@@ -6,7 +6,6 @@ from pypdf import PdfReader
 
 from src.config import DATA_DIR
 
-# topic -> exact section title in the PDF
 SECTIONS = {
     "about": "1. Sobre a Empório da Música",
     "hours": "2. Horário de Funcionamento",
@@ -25,8 +24,7 @@ SECTIONS = {
 def load_sections() -> dict[str, str]:
     reader = PdfReader(DATA_DIR / "políticas_da_loja.pdf")
     text = " ".join(page.extract_text() for page in reader.pages)
-    text = " ".join(text.split())  # the PDF is extracted with one word per line
-    # remove the header and footer repeated on every page
+    text = " ".join(text.split())
     text = re.sub(r"Página \d+", " ", text)
     text = text.replace("Empório da Música Manual de Políticas e Procedimentos", " ")
 

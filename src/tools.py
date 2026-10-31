@@ -9,7 +9,7 @@ from datetime import date
 from src.data_loader import load_orders, load_products, normalize
 from src.policies import load_sections
 
-SHOW_CALLS = False  # turned on by the CLI --debug flag
+SHOW_CALLS = False 
 
 PRODUCT_STATUS = {
     "active": "ativo no catálogo",
@@ -84,7 +84,6 @@ def search_products(
     if category:
         df = df[df["category_name"].apply(normalize) == normalize(category)]
     if term:
-        # score each product by how many words match and keep the best ones
         words = normalize(term).split()
         scores = df["search_text"].apply(lambda text: sum(w in text for w in words))
         df = df[(scores > 0) & (scores == scores.max())]
@@ -121,7 +120,6 @@ def get_order(order_id: int, email: str) -> dict:
 
     order = orders[orders["order_id"] == int(order_id)]
     customer = customers[customers["customer_id"].isin(order["customer_id"])]
-    # same message for "not found" and "wrong e-mail": does not reveal whether the order exists
     if order.empty or normalize(customer.iloc[0]["email"]) != normalize(email):
         return {"error": "Não encontrei pedido com esse número e e-mail."}
 
