@@ -9,7 +9,8 @@ from datetime import date
 from src.data_loader import load_orders, load_products, normalize
 from src.policies import load_sections
 
-SHOW_CALLS = False 
+SHOW_CALLS = False
+MAX_RESULTS = 15
 
 PRODUCT_STATUS = {
     "active": "ativo no catálogo",
@@ -97,10 +98,14 @@ def search_products(
     if df.empty:
         return {"found": 0, "products": []}
     df = df.sort_values("final_price")
-    return {
+    result = {
         "found": len(df),
-        "products": [_format_product(p) for _, p in df.head(10).iterrows()],
+        "products": [_format_product(p) for _, p in df.head(MAX_RESULTS).iterrows()],
     }
+    if len(df) > MAX_RESULTS:
+        result["note"] = (f"Only the {MAX_RESULTS} cheapest of {len(df)} products are listed. "
+                          "Tell the customer there are more options and offer to narrow the search.")
+    return result
 
 
 def get_order(order_id: int, email: str) -> dict:
